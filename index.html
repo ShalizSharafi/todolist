@@ -8,7 +8,7 @@
 </head>
 <body>
        <section class="w-full p-5 flex items-center justify-center bg-[#1A1A19] min-h-screen ">
-              <div class="todolist w-full md:w-1/2 p-5  flex-wrap flex  rounded-[5px] bg-white gap-2.5 shadow-[2px_2px_2px] shadow-white/10">
+              <div class="todolist w-full md:w-1/2 p-5  flex-wrap flex  rounded-[5px] bg-white gap-2.5 shadow-[2px_2px_2px] shadow-white/10 relative">
                      <div class="row gap-2.5">
                             <h1>To-Do list</h1>
                             <div class="row gap-2.5">
@@ -52,7 +52,13 @@
                     </div>
                      
 
+                    <div class="delete hidden absolute bottom-0 left-0 py-1.5 px-5 bg-text-body/25 backdrop-blur-2xl w-full justify-between z-10">
+                     <span></span>
+                     <h3>Task deleted permenantly</h3>
+                     <span class="undo">Undo</span>
+                    </div>
               </div>
+
        </section>
 </body>
 <script src="js/script.js"></script>

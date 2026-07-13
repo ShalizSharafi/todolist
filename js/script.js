@@ -3,7 +3,7 @@ const inp = document.getElementById('inp')
 const taskWall = document.querySelector('.taskWall')
 const date = document.querySelector('.date')
 const time = document.querySelector('.time')
-
+const _delete = document.querySelector('.delete')
 
 ///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
@@ -71,6 +71,38 @@ addBtn.addEventListener('click',()=>{
 })
 
 
+////deletion process ////////////////////////////////
+
+
+let x
 function myDelete(s){
-       
+       if(confirm('are you sure you want to delete the task?')){
+let counter = 4
+
+           x =  setInterval(() => {
+                     if(counter > 0){
+                            counter --
+                            _delete.style.display='flex'
+                            _delete.children[0].innerText = counter
+                            _delete.children[2].setAttribute('onclick','undoFunction(this)')
+
+                     }else{
+                            setTimeout(() => {
+                                   s.closest('.tasks').remove()
+                            }, 100);
+                           _delete.style.display='none'
+                           clearInterval(x)
+                     }
+              }, 1000);
+       }
 }
+
+
+function undoFunction(s){
+       clearInterval(x)
+        _delete.style.display='none'
+}
+
+
+
+////deletion process done/////////////////////////////////////////////
