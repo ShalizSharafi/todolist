@@ -8,7 +8,50 @@
               font-family:Roboto ;
               src: url(../fonts/Roboto-VariableFont_wdth\,wght.ttf);
        }
+       h1{
+              @apply text-[4vw] md:text-[2.5vw]  w-full flex items-center justify-start bg-clip-text text-transparent bg-linear-to-r from-brand-purple to-brand-blue font-medium
+       }
 }
+
+
+@layer components{
+      #inp{
+       @apply w-2/3 px-2.5 py-1 border-brand-purple border-2 text-text-body rounded-[5px] grow
+       placeholder:capitalize placeholder:text-inp-text
+
+      }
+
+      .circles{
+       @apply w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-tab-active-bg
+      }
+
+      .addBtn{
+       @apply w-fit px-2.5 py-1 bg-brand-purple rounded-[5px] text-white capitalize font-medium
+       cursor-pointer hover:text-brand-blue hover:bg-text-muted/50
+      }
+
+      .navItem{
+       @apply text-white hover:bg-white hover:text-brand-purple h-full flex items-center justify-center
+        px-2 capitalize cursor-pointer rounded-[5px] duration-200 w-fit sm:w-1/3
+      }
+
+      .taskSettings{
+       @apply flex items-center justify-between w-1/4
+      }
+
+      i{
+       @apply w-7.5 h-7.5 flex items-center justify-center 
+      }
+
+      .tasks{
+       @apply flex flex-wrap w-full  items-center justify-start shadow-[0_0_3px_1px] shadow-text-body/25
+       py-2 rounded-[5px] px-2.5
+       *:text-text-body 
+      }
+}
+
+
+
 
 
 @layer utilities{
@@ -19,79 +62,28 @@
 
 @theme{
 
+  --color-brand-blue: #3b82f6;
+  --color-brand-purple: #8b5cf6;
 
---color-bubblegum-pink-50: #fde8ed;
---color-bubblegum-pink-100: #fbd0da;
---color-bubblegum-pink-200: #f7a1b5;
---color-bubblegum-pink-300: #f37290;
---color-bubblegum-pink-400: #ef436b;
---color-bubblegum-pink-500: #eb1446;
---color-bubblegum-pink-600: #bc1038;
---color-bubblegum-pink-700: #8d0c2a;
---color-bubblegum-pink-800: #5e081c;
---color-bubblegum-pink-900: #2f040e;
---color-bubblegum-pink-950: #21030a;
+  --color-inp-text:#656564;
+  --color-swatch-blue: #3b82f6;
+  --color-swatch-orange: #f97316;
+  --color-swatch-orange-light: #fb923c;
+  --color-swatch-teal: #14b8a6;
+  --color-swatch-purple: #a855f7;
 
---color-golden-pollen-50: #fff7e5;
---color-golden-pollen-100: #fff0cc;
---color-golden-pollen-200: #ffe099;
---color-golden-pollen-300: #ffd166;
---color-golden-pollen-400: #ffc233;
---color-golden-pollen-500: #ffb300;
---color-golden-pollen-600: #cc8f00;
---color-golden-pollen-700: #996b00;
---color-golden-pollen-800: #664700;
---color-golden-pollen-900: #332400;
---color-golden-pollen-950: #241900;
+  --color-accent: #7c3aed;
+  --color-accent-hover: #6d28d9;
 
---color-emerald-50: #e6fef8;
---color-emerald-100: #cdfef1;
---color-emerald-200: #9cfce3;
---color-emerald-300: #6afbd4;
---color-emerald-400: #38fac6;
---color-emerald-500: #06f9b8;
---color-emerald-600: #05c793;
---color-emerald-700: #04956e;
---color-emerald-800: #03634a;
---color-emerald-900: #013225;
---color-emerald-950: #01231a;
+  --color-priority-high: #ef4444;
+  --color-priority-medium: #eab308;
+  --color-priority-low: #14b8a6;
 
---color-ocean-blue-50: #e8f8fd;
---color-ocean-blue-100: #d0f0fb;
---color-ocean-blue-200: #a2e1f6;
---color-ocean-blue-300: #73d2f2;
---color-ocean-blue-400: #44c3ee;
---color-ocean-blue-500: #16b4e9;
---color-ocean-blue-600: #1190bb;
---color-ocean-blue-700: #0d6c8c;
---color-ocean-blue-800: #09485d;
---color-ocean-blue-900: #04242f;
---color-ocean-blue-950: #031921;
+  --color-tab-active-bg: #ede9fe;
+  --color-tab-active-text: #5b21b6;
 
---color-dark-teal-50: #e8f8fd;
---color-dark-teal-100: #d0f0fb;
---color-dark-teal-200: #a2e1f6;
---color-dark-teal-300: #73d2f2;
---color-dark-teal-400: #44c3ee;
---color-dark-teal-500: #16b4e9;
---color-dark-teal-600: #1190bb;
---color-dark-teal-700: #0d6c8c;
---color-dark-teal-800: #09485d;
---color-dark-teal-900: #04242f;
---color-dark-teal-950: #031921;
-
-
-
-
-
-/* ///simple colors  */
-/* CSS HEX */
---color-black: #000000ff;
---color-floral-white: #fffdf5ff;
---color-golden-pollen: #ffd23fff;
---color-grapefruit-pink: #ff6b6bff;
---color-cool-sky: #74b9ffff;
---color-celadon: #88d498ff;
---color-sandy-brown: #ffa552ff;
---color-mauve: #b8a9faff;
+  --color-surface: #ffffff;
+  --color-page-bg: #f8fafc;
+  --color-text-body: #334155;
+  --color-text-muted: #94a3b8;
 }
