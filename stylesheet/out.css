@@ -7,11 +7,14 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
     --font-weight-medium: 500;
+    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-brand-blue: #3b82f6;
@@ -193,11 +196,29 @@
   .min-h-screen {
     min-height: 100vh;
   }
+  .w-1\/2 {
+    width: calc(1 / 2 * 100%);
+  }
+  .w-2\/10 {
+    width: calc(2 / 10 * 100%);
+  }
   .w-3\/10 {
     width: calc(3 / 10 * 100%);
   }
+  .w-4\/10 {
+    width: calc(4 / 10 * 100%);
+  }
+  .w-5\/10 {
+    width: calc(5 / 10 * 100%);
+  }
   .w-6\/10 {
     width: calc(6 / 10 * 100%);
+  }
+  .w-7\/10 {
+    width: calc(7 / 10 * 100%);
+  }
+  .w-61\/0 {
+    width: calc(61 / 0 * 100%);
   }
   .w-fit {
     width: fit-content;
@@ -208,6 +229,22 @@
   .grow {
     flex-grow: 1;
   }
+  .translate-y-1 {
+    --tw-translate-y: calc(var(--spacing) * 1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-1\.5 {
+    --tw-translate-y: calc(var(--spacing) * 1.5);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-2 {
+    --tw-translate-y: calc(var(--spacing) * 2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-2\.5 {
+    --tw-translate-y: calc(var(--spacing) * 2.5);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .flex-wrap {
     flex-wrap: wrap;
   }
@@ -216,6 +253,12 @@
   }
   .items-center {
     align-items: center;
+  }
+  .items-end {
+    align-items: flex-end;
+  }
+  .items-start {
+    align-items: flex-start;
   }
   .justify-between {
     justify-content: space-between;
@@ -231,6 +274,9 @@
   }
   .justify-start {
     justify-content: flex-start;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
   }
   .gap-2\.5 {
     gap: calc(var(--spacing) * 2.5);
@@ -249,6 +295,9 @@
   }
   .bg-brand-purple {
     background-color: var(--color-brand-purple);
+  }
+  .bg-red-500 {
+    background-color: var(--color-red-500);
   }
   .bg-swatch-orange {
     background-color: var(--color-swatch-orange);
@@ -277,12 +326,12 @@
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
+  .text-start {
+    text-align: start;
+  }
   .text-xs {
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
-  }
-  .text-text-body {
-    color: var(--color-text-body);
   }
   .text-text-body\/50 {
     color: color-mix(in srgb, #334155 50%, transparent);
@@ -298,6 +347,22 @@
     --tw-shadow-color: color-mix(in srgb, #fff 10%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-white) 10%, transparent) var(--tw-shadow-alpha), transparent);
+    }
+  }
+  .\*\:border {
+    :is(& > *) {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+    }
+  }
+  .\*\:border-black {
+    :is(& > *) {
+      border-color: var(--color-black);
+    }
+  }
+  .md\:w-1\/2 {
+    @media (width >= 48rem) {
+      width: calc(1 / 2 * 100%);
     }
   }
   .md\:justify-start {
@@ -437,8 +502,43 @@
     display: flex;
     height: calc(var(--spacing) * 7.5);
     width: calc(var(--spacing) * 7.5);
+    cursor: pointer;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #334155 15%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-text-body) 15%, transparent);
+        }
+      }
+    }
+    &:hover {
+      @media (hover: hover) {
+        :is(& > *) {
+          animation: var(--animate-pulse);
+        }
+      }
+    }
+    &:hover {
+      @media (hover: hover) {
+        :is(& > *) {
+          stroke: var(--color-brand-blue);
+        }
+      }
+    }
+    &:nth-of-type(1) {
+      &:hover {
+        @media (hover: hover) {
+          :is(& > *) {
+            stroke: var(--color-swatch-orange-light);
+          }
+        }
+      }
+    }
   }
   .tasks {
     display: flex;
@@ -478,6 +578,21 @@
     width: 100%;
     flex-wrap: wrap;
   }
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
 }
 @property --tw-shadow {
   syntax: "*";
@@ -544,6 +659,11 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-gradient-position {
   syntax: "*";
   inherits: false;
@@ -590,18 +710,21 @@
   syntax: "*";
   inherits: false;
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-duration {
   syntax: "*";
   inherits: false;
 }
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
@@ -616,6 +739,7 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-border-style: solid;
       --tw-gradient-position: initial;
       --tw-gradient-from: #0000;
       --tw-gradient-via: #0000;
@@ -626,7 +750,6 @@
       --tw-gradient-via-position: 50%;
       --tw-gradient-to-position: 100%;
       --tw-font-weight: initial;
-      --tw-border-style: solid;
       --tw-duration: initial;
     }
   }

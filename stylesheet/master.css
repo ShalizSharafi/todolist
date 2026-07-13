@@ -40,7 +40,7 @@
       }
 
       i{
-       @apply w-7.5 h-7.5 flex items-center justify-center 
+       @apply w-7.5 h-7.5 flex items-center justify-center hover:*:animate-pulse cursor-pointer hover:*:stroke-brand-blue duration-200 hover:bg-text-body/15 rounded-[5px] nth-of-type-[1]:hover:*:stroke-swatch-orange-light
       }
 
       .tasks{
