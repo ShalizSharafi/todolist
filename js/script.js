@@ -1,9 +1,24 @@
 const addBtn = document.querySelector('.addBtn')
 const inp = document.getElementById('inp')
 const taskWall = document.querySelector('.taskWall')
+const date = document.querySelector('.date')
+const time = document.querySelector('.time')
+
+
+///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
+
+let _date = new Date().toLocaleDateString('en')
+let _time = new Date().toLocaleTimeString('en')
+date.children[0].innerText = _date
+time.children[0].innerText = _time
+
+///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 
 
+
+
+/// add task section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 addBtn.addEventListener('click',()=>{
        let inpVal = inp.value
@@ -38,6 +53,9 @@ addBtn.addEventListener('click',()=>{
 
                                    </i>
                             </div>
+                            <div class="row justify-start items-center">
+                     <h3 class="w-full text-text-body/50 text-xs  ">${_time} - ${_date}</h3>
+                   </div>
                      
               `
               
@@ -49,15 +67,5 @@ addBtn.addEventListener('click',()=>{
 
 
 function myDelete(s){
-       if(confirm('are you sure you want to remove the task?')){
-
-              
-
-
-
-
-
-
-
-       }
+       
 }
