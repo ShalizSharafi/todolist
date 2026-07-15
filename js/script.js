@@ -119,28 +119,24 @@ function undoFunction(s){
 
 navItem.forEach((val)=>{
        val.addEventListener('click',()=>{
-              const filter = val.getAttribute('data-filter')
-              let tasks = document.querySelectorAll('.tasks')
-              tasks.forEach((val)=>{
+              let filter = val.getAttribute('data-filter')
+              
+              document.querySelectorAll('.tasks').forEach((val)=>{
                      if(filter == 'all'){
-
                             val.style.display='flex'
+                            console.log(filter)
                      }else if(filter == 'completed'){
-                           val.style.display = val.classList.contains('is-completed')? 'flex':'none'
+                            console.log(filter)
+                            console.log(val.classList.contains('is-completed'))
+                            val.style.display = val.classList.contains('is-completed') ? 'flex' : 'none'
                      }else if(filter == 'active'){
-                           val.style.display = val.classList.contains('active')? 'flex':'none'
+                            console.log(filter)
+                            console.log(val.classList.contains('is-active'))
+                            val.style.display = val.classList.contains('is-active') ? 'flex' : 'none'
                      }
               })
-
-
-
-
-
        })
 })
-
-
-
 
 
 /// checking section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
@@ -166,3 +162,6 @@ function checking(s){
               del.outerHTML=`<h3 class="taskText w-full text-start">${del.innerText}</h3>`
        }
 }
+
+
+
