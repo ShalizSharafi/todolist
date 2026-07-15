@@ -5,6 +5,9 @@ const date = document.querySelector('.date')
 const time = document.querySelector('.time')
 const _delete = document.querySelector('.delete')
 
+const navItem = document.querySelectorAll('.navItem')
+const checkinp = document.getElementById('checkinp')
+
 ///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 let _date = new Date().toLocaleDateString('en')
@@ -26,20 +29,24 @@ addBtn.addEventListener('click',()=>{
        if(inpVal == ''){
               alert('fill the task')
        }else{
+              taskGenerator(inpVal)
+       }
+})
 
-              let h3Val = inp.value
 
-              let li = document.createElement('li')
+//task generating function 
+function taskGenerator(x){
+       let li = document.createElement('li')
               li.classList.add('tasks')
               li.innerHTML=`
               
                            <div class="flex w-full gap-2 items-start  ">
                             <div class="w-fit flex items-start justify-center translate-y-1.5">
-                                   <input type="checkbox" name="" id="" onchange="checking(this)" class="flex" >
+                                   <input type="checkbox" name="" id="checkinp" onchange="checking(this)" class="flex" >
                             </div>
-                            <div class="w-fit grow flex flex-wrap content-start px-2">
-                            <h3 class="w-full text-start">
-                                   ${h3Val}
+                            <div class="w-fit grow flex flex-wrap content-start px-2 ">
+                            <h3 class="w-full text-start taskText">
+                                   ${x}
                             </h3>
                             </div>
                            </div>
@@ -67,13 +74,16 @@ addBtn.addEventListener('click',()=>{
               taskWall.appendChild(li)
               inp.value=null
               inp.focus()
-       }
-})
+}
+//task generating function 
 
 
-////deletion process ////////////////////////////////
 
 
+
+
+
+/// delete section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 let x
 function myDelete(s){
        if(confirm('are you sure you want to delete the task?')){
@@ -103,6 +113,56 @@ function undoFunction(s){
         _delete.style.display='none'
 }
 
+/// delete section done //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
+
+/// filter section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
+
+navItem.forEach((val)=>{
+       val.addEventListener('click',()=>{
+              const filter = val.getAttribute('data-filter')
+              let tasks = document.querySelectorAll('.tasks')
+              tasks.forEach((val)=>{
+                     if(filter == 'all'){
+
+                            val.style.display='flex'
+                     }else if(filter == 'completed'){
+                           val.style.display = val.classList.contains('is-completed')? 'flex':'none'
+                     }else if(filter == 'active'){
+                           val.style.display = val.classList.contains('active')? 'flex':'none'
+                     }
+              })
 
 
-////deletion process done/////////////////////////////////////////////
+
+
+
+       })
+})
+
+
+
+
+
+/// checking section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
+
+
+function checking(s){
+
+       let task = s.closest('.tasks')
+       let taskClone = task.querySelector('.taskText')
+
+       console.log(taskClone)
+
+
+       if(s.checked){
+              task.classList.add('is-completed')
+              task.classList.remove('is-active')
+              taskClone.outerHTML = `<del class="taskText w-full text-start">${taskClone.innerText}</del>`
+       }else{
+              task.classList.add('is-active')
+              task.classList.remove('is-completed')
+
+              let del = task.querySelector('.taskText')
+              del.outerHTML=`<h3 class="taskText w-full text-start">${del.innerText}</h3>`
+       }
+}
