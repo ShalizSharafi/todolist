@@ -54,6 +54,10 @@
        rounded-[5px]
       }
 
+
+      .navClick{
+       @apply bg-white text-brand-purple
+      }
 }
 
 

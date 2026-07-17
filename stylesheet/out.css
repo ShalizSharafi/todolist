@@ -550,6 +550,10 @@
     color: var(--color-white);
     text-transform: capitalize;
   }
+  .navClick {
+    background-color: var(--color-white);
+    color: var(--color-brand-purple);
+  }
 }
 @layer utilities {
   .row {

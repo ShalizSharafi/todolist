@@ -11,9 +11,6 @@ const checkinp = document.getElementById('checkinp')
 
 
 
-
-
-
 ///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 let _date = new Date().toLocaleDateString('en')
@@ -23,9 +20,18 @@ time.children[0].innerText = _time
 
 ///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
+//local storage
+let arr=[]
 
+let y = JSON.parse(localStorage.getItem('data'))
 
+if(y != undefined){
+       arr = [...y]
+       console.log(arr)
+       arr.forEach((item)=>taskGenerator(item))
+}
 
+//local storage
 
 /// add task section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 addBtn.addEventListener('click',()=>{
@@ -35,6 +41,9 @@ addBtn.addEventListener('click',()=>{
               alert('fill the task')
        }else{
               taskGenerator(inpVal)
+
+              arr.push(inpVal)
+              localStorage.setItem('data',JSON.stringify(arr))
        }
 })
 
@@ -123,8 +132,15 @@ function undoFunction(s){
 
 /// filter section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 let target
-navItem.forEach((val)=>{
+navItem.forEach((val,i)=>{
        val.addEventListener('click',()=>{
+              val.classList.toggle('navClick')
+              navItem.forEach((item, index)=>{
+                     if(index != i){
+                            item.classList.remove('navClick')
+                     }
+              })
+
               let temp = val.getAttribute('data-filter')
               console.log(temp)
               let tasks = document.querySelectorAll('.taskWall>li')
