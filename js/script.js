@@ -9,8 +9,6 @@ const navItem = document.querySelectorAll('.navItem')
 const checkinp = document.getElementById('checkinp')
 
 
-let arr =[]
-
 
 
 
@@ -30,7 +28,6 @@ time.children[0].innerText = _time
 
 
 /// add task section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
-
 addBtn.addEventListener('click',()=>{
        let inpVal = inp.value
 
@@ -38,7 +35,6 @@ addBtn.addEventListener('click',()=>{
               alert('fill the task')
        }else{
               taskGenerator(inpVal)
-
        }
 })
 
@@ -69,7 +65,7 @@ function taskGenerator(x){
 </svg>
 
                                    </i>
-                                   <i class="edit">
+                                   <i class="edit" onclick="myEdit(this)" >
                                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="size-5">
   <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
 </svg>
@@ -81,6 +77,7 @@ function taskGenerator(x){
               `
               
               taskWall.appendChild(li)
+              checking(li)
               inp.value=null
               inp.focus()
 }
@@ -96,7 +93,7 @@ function taskGenerator(x){
 let x
 function myDelete(s){
        if(confirm('are you sure you want to delete the task?')){
-let counter = 4
+let counter = 3
 
            x =  setInterval(() => {
                      if(counter > 0){
@@ -162,7 +159,6 @@ function checking(s){
 
        console.log(taskClone)
 
-
        if(s.checked){
               task.dataset.status='completed'
               taskClone.outerHTML = `<del class="taskText w-full text-start">${taskClone.innerText}</del>`
@@ -179,7 +175,44 @@ function checking(s){
 
 
 function myEdit(s){
-       
+       let clone = s.closest('.tasks').children[0].children[1].children[0].innerText
+       console.log(clone)
+       s.closest('.tasks').remove()
+       let li = document.createElement('li')
+       li.classList.add('tasks')
+       li.innerHTML=`
+                           <div class="flex w-full gap-2 items-start flex-wrap ">
+                            <div class="w-full flex content-start gap-2.5">
+                            <i class="edit" >
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="size-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+</svg>
+
+                                   </i>
+                            <input type="text" class="inpTop" id="inp" placeholder="add a new task ..." >
+                            </div>
+                           
+                            <div class="row justify-between items-center">
+                     <h3 class="w-1/2 text-text-body/50 text-xs  ">${_time} - ${_date}</h3>
+                      <div class="w-1/2 flex items-center justify-end gap-2.5">
+                                   <button class="saveBtn addBtn" onclick="mySave(this)">ok</button>
+                            </div>
+                   </div>
+                   </div>
+                                
+       `
+       li.querySelector('.inpTop').value = clone
+       taskWall.appendChild(li)
 }
 
+
+/////saving after the edit
+
+
+function mySave(s){
+       let clone = s.closest('.tasks').querySelector('.inpTop').value
+       s.closest('.tasks').remove()
+       taskGenerator(clone)
+       document.querySelector('.tasks').children[1].children[0].innerText = `edited at ${_time} - ${_date}`
+}
 

@@ -15,7 +15,7 @@
 
 
 @layer components{
-      #inp{
+      .inpTop{
        @apply w-2/3 px-2.5 py-1 border-brand-purple border-2 text-text-body rounded-[5px] grow
        placeholder:capitalize placeholder:text-inp-text
 
