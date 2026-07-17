@@ -8,6 +8,14 @@ const _delete = document.querySelector('.delete')
 const navItem = document.querySelectorAll('.navItem')
 const checkinp = document.getElementById('checkinp')
 
+
+let arr =[]
+
+
+
+
+
+
 ///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 let _date = new Date().toLocaleDateString('en')
@@ -30,6 +38,7 @@ addBtn.addEventListener('click',()=>{
               alert('fill the task')
        }else{
               taskGenerator(inpVal)
+
        }
 })
 
@@ -116,26 +125,30 @@ function undoFunction(s){
 /// delete section done //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 /// filter section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
-
+let target
 navItem.forEach((val)=>{
        val.addEventListener('click',()=>{
-              let filter = val.getAttribute('data-filter')
+              let temp = val.getAttribute('data-filter')
+              console.log(temp)
+              let tasks = document.querySelectorAll('.taskWall>li')
+              console.log(tasks)
               
-              document.querySelectorAll('.tasks').forEach((val)=>{
-                     if(filter == 'all'){
-                            val.style.display='flex'
-                            console.log(filter)
-                     }else if(filter == 'completed'){
-                            console.log(filter)
-                            console.log(val.classList.contains('is-completed'))
-                            val.style.display = val.classList.contains('is-completed') ? 'flex' : 'none'
-                     }else if(filter == 'active'){
-                            console.log(filter)
-                            console.log(val.classList.contains('is-active'))
-                            val.style.display = val.classList.contains('is-active') ? 'flex' : 'none'
+              tasks.forEach((item)=>{
+
+                     item.style.display='flex'
+                     if(temp == 'completed'){
+                             if(item.getAttribute('data-status') != 'completed') item.style.display='none'
+
+                     }else if(temp == 'active'){
+                            if(item.getAttribute('data-status') != 'active') item.style.display='none'
+
+                     }else{
+                            item.style.display='flex'
                      }
               })
+             
        })
+       
 })
 
 
@@ -151,17 +164,22 @@ function checking(s){
 
 
        if(s.checked){
-              task.classList.add('is-completed')
-              task.classList.remove('is-active')
+              task.dataset.status='completed'
               taskClone.outerHTML = `<del class="taskText w-full text-start">${taskClone.innerText}</del>`
        }else{
-              task.classList.add('is-active')
-              task.classList.remove('is-completed')
-
+              task.dataset.status='active'
               let del = task.querySelector('.taskText')
               del.outerHTML=`<h3 class="taskText w-full text-start">${del.innerText}</h3>`
        }
 }
 
+
+
+///edit////
+
+
+function myEdit(s){
+       
+}
 
 
