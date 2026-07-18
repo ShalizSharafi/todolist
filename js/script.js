@@ -230,7 +230,12 @@ function mySave(s){
        let clone = s.closest('.tasks').querySelector('.inpTop').value
        s.closest('.tasks').remove()
        taskGenerator(clone)
-       document.querySelectorAll('.tasks').children[1].children[0].innerText = `edited at ${_time} - ${_date}`
+       
+       
+       let now = new Date()
+       let newTask = taskWall.lastElementChild
+       newTask.children[1].children[0].innerText =
+         `edited at ${now.toLocaleTimeString('en')} - ${now.toLocaleDateString('en')}`
 }
 
 /// editing and saving  section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
@@ -255,7 +260,7 @@ addNote.addEventListener('click',()=>{
                                    </div>
 
                                    <div class="w-full flex h-2/8 items-center justify-between">
-                                           <h3 class="w-1/2 text-text-body/50 text-xs  ">${_time} - ${_date}</h3>
+                                           <h3 class="w-1/2 text-text-body/50 text-[11px]  ">${_time} - ${_date}</h3>
                                   <div class="w-1/2 flex gap-2.5 items-center justify-end">
                                     <i class="delete" onclick="deleteNote(this)">
                                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="size-5">
@@ -306,6 +311,7 @@ let editBtn = note.querySelector('.edit')
        note.children[1].children[0].innerText = noteInp.value
        noteInp.value=null
        noteInp.focus()
+       note.children[2].children[0].innerText=`edited at ${_time} - ${_date}`
       })
 
 
