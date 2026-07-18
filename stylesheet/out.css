@@ -26,7 +26,6 @@
     --color-swatch-orange: #f97316;
     --color-swatch-orange-light: #fb923c;
     --color-swatch-teal: #14b8a6;
-    --color-swatch-purple: #a855f7;
     --color-tab-active-bg: #ede9fe;
     --color-text-body: #334155;
     --color-text-muted: #94a3b8;
@@ -205,6 +204,9 @@
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
   }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
+  }
   .flex {
     display: flex;
   }
@@ -258,6 +260,9 @@
   .flex-wrap {
     flex-wrap: wrap;
   }
+  .content-between {
+    align-content: space-between;
+  }
   .content-start {
     align-content: flex-start;
   }
@@ -294,6 +299,9 @@
   .overflow-scroll {
     overflow: scroll;
   }
+  .overflow-x-hidden {
+    overflow-x: hidden;
+  }
   .rounded-\[5px\] {
     border-radius: 5px;
   }
@@ -307,14 +315,14 @@
   .bg-\[\#1A1A19\] {
     background-color: #1A1A19;
   }
+  .bg-\[url\] {
+    background-color: url;
+  }
   .bg-brand-blue {
     background-color: var(--color-brand-blue);
   }
   .bg-brand-purple {
     background-color: var(--color-brand-purple);
-  }
-  .bg-swatch-blue {
-    background-color: var(--color-swatch-blue);
   }
   .bg-swatch-blue\/20 {
     background-color: color-mix(in srgb, #3b82f6 20%, transparent);
@@ -322,29 +330,11 @@
       background-color: color-mix(in oklab, var(--color-swatch-blue) 20%, transparent);
     }
   }
-  .bg-swatch-blue\/50 {
-    background-color: color-mix(in srgb, #3b82f6 50%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-swatch-blue) 50%, transparent);
-    }
-  }
   .bg-swatch-orange {
     background-color: var(--color-swatch-orange);
   }
   .bg-swatch-orange-light {
     background-color: var(--color-swatch-orange-light);
-  }
-  .bg-swatch-orange\/25 {
-    background-color: color-mix(in srgb, #f97316 25%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-swatch-orange) 25%, transparent);
-    }
-  }
-  .bg-swatch-purple\/25 {
-    background-color: color-mix(in srgb, #a855f7 25%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-swatch-purple) 25%, transparent);
-    }
   }
   .bg-swatch-teal {
     background-color: var(--color-swatch-teal);
@@ -364,6 +354,15 @@
       --tw-gradient-position: to right in oklab;
     }
     background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-\[url\(\)\] {
+    background-image: url();
+  }
+  .bg-\[url\(\.\.\/\)\] {
+    background-image: url(../);
+  }
+  .bg-\[url\(\.\.\/images\/svg\.png\)\] {
+    background-image: url(../images/svg.png);
   }
   .from-swatch-blue {
     --tw-gradient-from: var(--color-swatch-blue);
@@ -396,9 +395,6 @@
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
-  }
-  .pt-5 {
-    padding-top: calc(var(--spacing) * 5);
   }
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
@@ -491,19 +487,24 @@
       margin-top: calc(var(--spacing) * 0);
     }
   }
+  .xl\:mb-0 {
+    @media (width >= 80rem) {
+      margin-bottom: calc(var(--spacing) * 0);
+    }
+  }
   .xl\:w-1\/2 {
     @media (width >= 80rem) {
       width: calc(1 / 2 * 100%);
     }
   }
-  .xl\:p-5 {
-    @media (width >= 80rem) {
-      padding: calc(var(--spacing) * 5);
-    }
-  }
   .xl\:px-5 {
     @media (width >= 80rem) {
       padding-inline: calc(var(--spacing) * 5);
+    }
+  }
+  .xl\:py-5 {
+    @media (width >= 80rem) {
+      padding-block: calc(var(--spacing) * 5);
     }
   }
   .xl\:pl-5 {
@@ -678,6 +679,9 @@
     align-items: center;
     justify-content: flex-start;
     border-radius: 5px;
+    border-left-style: var(--tw-border-style);
+    border-left-width: 4px;
+    border-color: var(--color-brand-blue);
     padding-inline: calc(var(--spacing) * 2.5);
     padding-block: calc(var(--spacing) * 2);
     --tw-shadow: 0 0 3px 1px var(--tw-shadow-color, currentcolor);
@@ -708,7 +712,7 @@
   }
   .addNoteBox {
     display: flex;
-    height: calc(var(--spacing) * 75);
+    height: calc(var(--spacing) * 64);
     width: calc(1 / 2 * 100%);
     flex-grow: 1;
     cursor: pointer;
@@ -723,7 +727,7 @@
   }
   .note {
     display: flex;
-    height: calc(var(--spacing) * 75);
+    height: calc(var(--spacing) * 64);
     width: calc(1 / 2 * 100%);
     flex-grow: 1;
     flex-wrap: wrap;

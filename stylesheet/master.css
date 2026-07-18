@@ -45,7 +45,7 @@
 
       .tasks{
        @apply flex flex-wrap w-full  items-center justify-start shadow-[0_0_3px_1px] shadow-text-body/25
-       py-2 rounded-[5px] px-2.5
+       py-2 rounded-[5px] px-2.5 border-l-4 border-brand-blue
        *:text-text-body 
       }
 
@@ -60,12 +60,12 @@
       }
       
       .addNoteBox{
-       @apply w-1/2 lg:w-1/4 grow flex h-75 rounded-[10px]   bg-brand-blue p-5 flex-wrap
+       @apply w-1/2 lg:w-1/4 grow flex h-64 rounded-[10px]   bg-brand-blue p-5 flex-wrap
        justify-center cursor-pointer
       }
 
       .note{
-       @apply w-1/2 lg:w-1/4 grow flex h-75 rounded-[10px] border-2 border-swatch-blue bg-white p-5 flex-wrap gap-y-2.5
+       @apply w-1/2 lg:w-1/4 grow flex h-64 rounded-[10px] border-2 border-swatch-blue bg-white p-5 flex-wrap gap-y-2.5
       }
 }
 

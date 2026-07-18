@@ -246,11 +246,12 @@ addNote.addEventListener('click',()=>{
        <div class="w-full flex h-1/8 gap-2.5 ">
                                    <input type="text" placeholder="add note .." name="" id="" class="w-2/3 px-2.5 border-brand-purple border-2 text-text-body rounded-[5px] 
        placeholder:capitalize placeholder:text-inp-text grow noteInp">
-                                   <button class="addBtn" >+</button>
+                                   <button class="addBtn flex items-center justify-center" >+</button>
+                                   <button class="okBtn addBtn hidden items-center justify-center">ok</button>
                                    </div>
 
                                    <div class="row overflow-scroll h-5/8 shadow-[0_0_3px_1px] shadow-text-body/25 bg-swatch-blue/20 p-1 rounded-[5px] backdrop-blur-[5px]">
-                                          <p></p>
+                                          <p class=" overflow-x-hidden"></p>
                                    </div>
 
                                    <div class="w-full flex h-2/8 items-center justify-between">
@@ -273,21 +274,40 @@ addNote.addEventListener('click',()=>{
        `
 
        noteWall.appendChild(note)
-       ///adding new notes to the boxes
-        let addNoteBtn = note.querySelector('.note .addBtn')
-      addNoteBtn.addEventListener('click',()=>{
+
        let noteInp = note.querySelector('.noteInp')
+let addNoteBtn = note.querySelector('.note .addBtn')
+let okBtn = note.querySelector('.okBtn')
+let editBtn = note.querySelector('.edit')
 
+
+       ///adding new notes to the boxes
+      addNoteBtn.addEventListener('click',()=>{
        let noteInpVal = noteInp.value
-       note.children[1].children[0].innerText = noteInpVal
+       note.children[1].children[0].innerText += noteInpVal
+       noteInp.value=null
+       noteInp.focus()
       })
-
-
-
 
       ////edting
 
-      
+      editBtn.addEventListener('click',()=>{
+       window.okBtn=okBtn
+       okBtn.style.display='flex'
+       addNoteBtn.style.display='none'
+       let noteText = note.children[1].children[0].innerText 
+       noteInp.value = noteText
+      })
+
+
+      okBtn.addEventListener('click',()=>{
+       okBtn.style.display='none'
+       addNoteBtn.style.display='flex'
+       note.children[1].children[0].innerText = noteInp.value
+       noteInp.value=null
+       noteInp.focus()
+      })
+
 
        flag ++
        return
@@ -300,4 +320,5 @@ addNote.addEventListener('click',()=>{
 
 function deleteNote(s){
        if((confirm('are you sure you want to delete your note?')))  s.closest('.note').remove()
+              flag --
 }
