@@ -58,6 +58,15 @@
       .navClick{
        @apply bg-white text-brand-purple
       }
+      
+      .addNoteBox{
+       @apply w-1/2 lg:w-1/4 grow flex h-75 rounded-[10px]   bg-brand-blue p-5 flex-wrap
+       justify-center cursor-pointer
+      }
+
+      .note{
+       @apply w-1/2 lg:w-1/4 grow flex h-75 rounded-[10px] border-2 border-swatch-blue bg-white p-5 flex-wrap gap-y-2.5
+      }
 }
 
 

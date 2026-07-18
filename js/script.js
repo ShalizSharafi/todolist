@@ -7,8 +7,8 @@ const _delete = document.querySelector('.delete')
 
 const navItem = document.querySelectorAll('.navItem')
 const checkinp = document.getElementById('checkinp')
-
-
+const noteWall = document.querySelector('.noteWall')
+const addNote = document.querySelector('.addNoteBox')
 
 
 ///date and time//////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
@@ -187,7 +187,8 @@ function checking(s){
 
 
 
-///edit////
+
+/// editing and saving  section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 
 function myEdit(s){
@@ -229,6 +230,74 @@ function mySave(s){
        let clone = s.closest('.tasks').querySelector('.inpTop').value
        s.closest('.tasks').remove()
        taskGenerator(clone)
-       document.querySelector('.tasks').children[1].children[0].innerText = `edited at ${_time} - ${_date}`
+       document.querySelectorAll('.tasks').children[1].children[0].innerText = `edited at ${_time} - ${_date}`
 }
 
+/// editing and saving  section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
+
+/// note section section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
+
+let flag = 0
+addNote.addEventListener('click',()=>{
+      if(flag < 5){
+        let note = document.createElement('li')
+       note.classList.add('note')
+       note.innerHTML=`
+       <div class="w-full flex h-1/8 gap-2.5 ">
+                                   <input type="text" placeholder="add note .." name="" id="" class="w-2/3 px-2.5 border-brand-purple border-2 text-text-body rounded-[5px] 
+       placeholder:capitalize placeholder:text-inp-text grow noteInp">
+                                   <button class="addBtn" >+</button>
+                                   </div>
+
+                                   <div class="row overflow-scroll h-5/8 shadow-[0_0_3px_1px] shadow-text-body/25 bg-swatch-blue/20 p-1 rounded-[5px] backdrop-blur-[5px]">
+                                          <p></p>
+                                   </div>
+
+                                   <div class="w-full flex h-2/8 items-center justify-between">
+                                           <h3 class="w-1/2 text-text-body/50 text-xs  ">${_time} - ${_date}</h3>
+                                  <div class="w-1/2 flex gap-2.5 items-center justify-end">
+                                    <i class="delete" onclick="deleteNote(this)">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="size-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+</svg>
+
+                                   </i>
+                                   <i class="edit" >
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="size-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+</svg>
+
+                                   </i>
+                                  </div>
+                            </div>
+       `
+
+       noteWall.appendChild(note)
+       ///adding new notes to the boxes
+        let addNoteBtn = note.querySelector('.note .addBtn')
+      addNoteBtn.addEventListener('click',()=>{
+       let noteInp = note.querySelector('.noteInp')
+
+       let noteInpVal = noteInp.value
+       note.children[1].children[0].innerText = noteInpVal
+      })
+
+
+
+
+      ////edting
+
+      
+
+       flag ++
+       return
+      }
+
+})
+
+
+////deleting notes
+
+function deleteNote(s){
+       if((confirm('are you sure you want to delete your note?')))  s.closest('.note').remove()
+}

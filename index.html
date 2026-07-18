@@ -7,8 +7,8 @@
        <title>ToDoList</title>
 </head>
 <body>
-       <section class="w-full p-5 flex items-center justify-center bg-[#1A1A19] min-h-screen ">
-              <div class="todolist w-full md:w-1/2 p-5  flex-wrap flex  rounded-[5px] bg-white gap-2.5 shadow-[2px_2px_2px] shadow-white/10 relative">
+       <section class="w-full p-5 flex  flex-wrap bg-[#1A1A19] min-h-screen ">
+              <div class="todolist w-full xl:w-1/2 p-5  flex-wrap flex  rounded-[5px] bg-white gap-2.5 shadow-[2px_2px_2px] shadow-white/10 relative">
                      <div class="row gap-2.5">
                             <h1>To-Do list</h1>
                             <div class="row gap-2.5">
@@ -58,8 +58,38 @@
                      <span class="undo">Undo</span>
                     </div>
               </div>
+              <div class=" w-full xl:w-1/2 bg-[#1A1A19] pt-5 pb-5 xl:px-5 mt-10 xl:mt-0">
+                     <div class="row rounded-[5px]">
+                            <div class="row gap-2.5 xl:pl-5">
+                            <h1 class="bg-linear-to-r  from-swatch-blue to-swatch-teal">Notes ... </h1>
+                            <div class="row gap-2.5">
+                                   <span class="circles bg-brand-blue"></span>
+                                   <span class="circles  bg-swatch-orange"></span>
+                                   <span class="circles  bg-swatch-teal"></span>
+                                   <span class="circles bg-swatch-orange-light"></span>
+                                   <span class="circles bg-brand-purple"></span>
+                            </div>
+                            </div>
+                     </div>
+                            <!-- note wall /// //////// / / / / // / / / // / /  -->
+                     <div class="w-full flex flex-wrap  mt-10 xl:p-5  justify-start content-start gap-5 noteWall ">
+                            <div class="addNoteBox">
+                                   <div class="row items-start justify-start">
+                                          <h3 class="w-full text-start flex items-start justify-start text-white text-xl font-normal capitalize">you can add up to 5 notes!</h3>
+                                   </div>
 
+                                   <div class="row items-center justify-center ">
+                                  <figure class="w-25 h-25 flex items-center justify-center">
+                                   <img src="images/add-fill.png" alt="">
+                                  </figure>
+
+                                   </div>
+                            </div>
+                            <!-- creating notes -->
+              </div>
        </section>
 </body>
 <script src="js/script.js"></script>
 </html>
+
+
