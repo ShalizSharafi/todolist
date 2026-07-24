@@ -9,7 +9,7 @@
               src: url(../fonts/Roboto-VariableFont_wdth\,wght.ttf);
        }
        h1{
-              @apply text-[4vw] md:text-[2.5vw]  w-full flex items-center justify-start bg-clip-text text-transparent bg-linear-to-r from-brand-purple to-brand-blue font-medium
+              @apply text-[4vw] md:text-[2.5vw]  w-1/2 flex items-center justify-start bg-clip-text text-transparent bg-linear-to-r from-brand-purple to-brand-blue font-medium
        }
 }
 
@@ -22,7 +22,7 @@
       }
 
       .circles{
-       @apply w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-tab-active-bg
+       @apply w-3.5 h-3.5 lg:w-5 lg:h-5 rounded-full bg-tab-active-bg
       }
 
       .addBtn{
@@ -70,6 +70,10 @@
 
       .line{
        @apply line-through
+      }
+
+      .done{
+       @apply border-l-4 border-swatch-teal
       }
 }
 

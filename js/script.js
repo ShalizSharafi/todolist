@@ -68,7 +68,7 @@ function taskGenerator(taskList){
                            </div>
                          
                             <div class="row justify-between items-center">
-                     <h3 class="w-1/2 text-text-body/50 text-xs  ">${_time} - ${_date}</h3>
+                     <h3 class="w-1/2 text-text-body/50 text-xs  ">${taskList.editedAt ? taskList.editedAt : _time + ' - ' + _date}</h3>
                       <div class="w-1/2 flex items-center justify-end gap-2.5">
                                    <i class="delete" onclick="myDelete(this)">
                                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="size-5">
@@ -189,6 +189,7 @@ function checking(s){
 
        let taskText = s.closest('.tasks').querySelector('.taskText')
        taskText.classList.toggle('line')
+       
 
 
        let allTasks = Array.from(document.querySelectorAll('.tasks'))
@@ -200,8 +201,11 @@ function checking(s){
 
        if(s.checked){
                      s.closest('.tasks').dataset.status ='completed'
+                     
               }else{
                      s.closest('.tasks').dataset.status ='active'
+                     
+
               }
 
        localStorage.setItem('data',JSON.stringify(arr))
@@ -215,11 +219,17 @@ function checking(s){
 
 
 function myEdit(s){
+       
+       let taskLi = s.closest('.tasks')
+       let allTasks = Array.from(document.querySelectorAll('.tasks'))
+       let i = allTasks.indexOf(taskLi)
+       console.log(i)
        let clone = s.closest('.tasks').children[0].children[1].children[0].innerText
        console.log(clone)
-       s.closest('.tasks').remove()
+       taskLi.remove()
        let li = document.createElement('li')
        li.classList.add('tasks')
+       li.dataset.editIndex = i
        li.innerHTML=`
                            <div class="flex w-full gap-2 items-start flex-wrap ">
                             <div class="w-full flex content-start gap-2.5">
@@ -243,6 +253,7 @@ function myEdit(s){
        `
        li.querySelector('.inpTop').value = clone
        taskWall.appendChild(li)
+
 }
 
 
@@ -250,15 +261,26 @@ function myEdit(s){
 
 
 function mySave(s){
-       let clone = s.closest('.tasks').querySelector('.inpTop').value
-       s.closest('.tasks').remove()
-       taskGenerator(clone)
-       
-       
+       let editBox = s.closest('.tasks')
+       let clone = editBox.querySelector('.inpTop').value
+       let i = Number(editBox.dataset.editIndex)
+       editBox.remove()
+
        let now = new Date()
+       let editedAt= `edited at ${now.toLocaleTimeString('en')} - ${now.toLocaleDateString('en')}`
+
+      let taskList = { task: clone, checked: arr[i].checked , editedAt:editedAt}
+       taskGenerator(taskList)
+       
+       arr[i] = taskList
+
+       
+
+       localStorage.setItem('data',JSON.stringify(arr))
+
        let newTask = taskWall.lastElementChild
-       newTask.children[1].children[0].innerText =
-         `edited at ${now.toLocaleTimeString('en')} - ${now.toLocaleDateString('en')}`
+       newTask.children[1].children[0].innerText = editedAt  
+       
 }
 
 /// editing and saving  section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
