@@ -1,3 +1,4 @@
+
 const addBtn = document.querySelector('.addBtn')
 const inp = document.getElementById('inp')
 const taskWall = document.querySelector('.taskWall')
@@ -26,9 +27,8 @@ let arr=[]
 let y = JSON.parse(localStorage.getItem('data'))
 
 if(y != undefined){
-       arr = [...y]
-       console.log(arr)
-       arr.forEach((item)=>taskGenerator(item))
+       y.forEach((val)=>taskGenerator(val))
+       arr = y
 }
 
 //local storage
@@ -40,27 +40,29 @@ addBtn.addEventListener('click',()=>{
        if(inpVal == ''){
               alert('fill the task')
        }else{
-              taskGenerator(inpVal)
+              const taskList = {task:inpVal, checked:false}
+              taskGenerator(taskList)
 
-              arr.push(inpVal)
+              arr.push(taskList)
               localStorage.setItem('data',JSON.stringify(arr))
        }
 })
 
 
 //task generating function 
-function taskGenerator(x){
+function taskGenerator(taskList){
        let li = document.createElement('li')
               li.classList.add('tasks')
+              li.dataset.status = taskList.checked ? 'completed' : 'active'
               li.innerHTML=`
               
                            <div class="flex w-full gap-2 items-start  ">
                             <div class="w-fit flex items-start justify-center translate-y-1.5">
-                                   <input type="checkbox" name="" id="checkinp" onchange="checking(this)" class="flex" >
+                                   <input type="checkbox" name="" id="checkinp" onchange="checking(this)" class="flex " ${taskList.checked ? 'checked' : ''} >
                             </div>
                             <div class="w-fit grow flex flex-wrap content-start px-2 ">
-                            <h3 class="w-full text-start taskText">
-                                   ${x}
+                            <h3 class="w-full text-start taskText ${taskList.checked ? 'line': ''}">
+                                   ${taskList.task}
                             </h3>
                             </div>
                            </div>
@@ -86,23 +88,18 @@ function taskGenerator(x){
               `
               
               taskWall.appendChild(li)
-              checking(li)
               inp.value=null
               inp.focus()
 }
 //task generating function 
 
 
-
-
-
-
-
 /// delete section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 let x
+let deleteds
 function myDelete(s){
        if(confirm('are you sure you want to delete the task?')){
-let counter = 3
+let counter = 2
 
            x =  setInterval(() => {
                      if(counter > 0){
@@ -112,11 +109,18 @@ let counter = 3
                             _delete.children[2].setAttribute('onclick','undoFunction(this)')
 
                      }else{
+                            deleteds = document.querySelectorAll('.taskWall>li .delete')
+                            console.log('yet to be deleted: ',deleteds)
+                            let allTask = Array.from(document.querySelectorAll('.tasks'))
+                            let i = allTask.indexOf(s.closest('.tasks'))
                             setTimeout(() => {
+                                   arr.splice(i,1)
                                    s.closest('.tasks').remove()
+                           localStorage.setItem('data',JSON.stringify(arr))
                             }, 100);
                            _delete.style.display='none'
                            clearInterval(x)
+                           console.log(' deleteds: ',deleteds)
                      }
               }, 1000);
        }
@@ -131,7 +135,6 @@ function undoFunction(s){
 /// delete section done //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 /// filter section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
-let target
 navItem.forEach((val,i)=>{
        val.addEventListener('click',()=>{
               val.classList.toggle('navClick')
@@ -150,10 +153,10 @@ navItem.forEach((val,i)=>{
 
                      item.style.display='flex'
                      if(temp == 'completed'){
-                             if(item.getAttribute('data-status') != 'completed') item.style.display='none'
+                             if((item.getAttribute('data-status')) != 'completed') item.style.display='none'
 
                      }else if(temp == 'active'){
-                            if(item.getAttribute('data-status') != 'active') item.style.display='none'
+                            if((item.getAttribute('data-status')) != 'active') item.style.display='none'
 
                      }else{
                             item.style.display='flex'
@@ -170,19 +173,39 @@ navItem.forEach((val,i)=>{
 
 function checking(s){
 
-       let task = s.closest('.tasks')
-       let taskClone = task.querySelector('.taskText')
+       // let task = s.closest('.tasks')
+       // let taskClone = task.querySelector('.taskText')
 
-       console.log(taskClone)
+       // console.log(taskClone)
+
+       // if(s.checked){
+       //        task.dataset.status='completed'
+       //        taskClone.outerHTML = `<del class="taskText w-full text-start">${taskClone.innerText}</del>`
+       // }else{
+       //        task.dataset.status='active'
+       //        let del = task.querySelector('.taskText')
+       //        del.outerHTML=`<h3 class="taskText w-full text-start">${del.innerText}</h3>`
+       // }
+
+       let taskText = s.closest('.tasks').querySelector('.taskText')
+       taskText.classList.toggle('line')
+
+
+       let allTasks = Array.from(document.querySelectorAll('.tasks'))
+       console.log(allTasks)
+       let i = allTasks.indexOf(s.closest('.tasks'))
+       console.log(i)
+
+       arr[i].checked = s.checked
 
        if(s.checked){
-              task.dataset.status='completed'
-              taskClone.outerHTML = `<del class="taskText w-full text-start">${taskClone.innerText}</del>`
-       }else{
-              task.dataset.status='active'
-              let del = task.querySelector('.taskText')
-              del.outerHTML=`<h3 class="taskText w-full text-start">${del.innerText}</h3>`
-       }
+                     s.closest('.tasks').dataset.status ='completed'
+              }else{
+                     s.closest('.tasks').dataset.status ='active'
+              }
+
+       localStorage.setItem('data',JSON.stringify(arr))
+       
 }
 
 
@@ -240,7 +263,16 @@ function mySave(s){
 
 /// editing and saving  section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
-/// note section section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+/// NOTE SECRION section //////////////////////////////////////////////////////////////////////////////////////////////////////////////_____++++++**********///////////////////////////////////////////////////////
 
 let flag = 0
 addNote.addEventListener('click',()=>{
